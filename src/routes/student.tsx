@@ -9,16 +9,19 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { Download } from "lucide-react";
+import { Download, Info, Lock, Clock } from "lucide-react";
 import {
   attendance,
   downloadCSV,
   getSession,
+  lastMarkedAt,
   percentageFor,
   students,
   subjects,
+  todaySchedule,
 } from "@/lib/attendance-data";
 import { AppShell, StatCard } from "@/components/app-shell";
+
 
 export const Route = createFileRoute("/student")({
   component: StudentDashboard,
