@@ -146,7 +146,62 @@ export function percentageFor(studentId: string, subjectCode?: string): number {
   return Math.round((present / rows.length) * 1000) / 10;
 }
 
+export interface ScheduleSlot {
+  subjectCode: string;
+  subjectName: string;
+  faculty: string;
+  period: number;
+  startTime: string;
+  endTime: string;
+}
+
+// Period-wise timetable (50-minute periods) scheduled by admin/teacher.
+const PERIOD_TIMES: Record<number, [string, string]> = {
+  1: ["09:00", "09:50"],
+  2: ["09:55", "10:45"],
+  3: ["11:00", "11:50"],
+  4: ["11:55", "12:45"],
+  5: ["13:30", "14:20"],
+  6: ["14:25", "15:15"],
+  7: ["15:20", "16:10"],
+};
+
+export function todaySchedule(): ScheduleSlot[] {
+  return subjects
+    .map((sub, si) => {
+      const period = (si % 6) + 1;
+      const [startTime, endTime] = PERIOD_TIMES[period];
+      return {
+        subjectCode: sub.code,
+        subjectName: sub.name,
+        faculty: sub.faculty,
+        period,
+        startTime,
+        endTime,
+      };
+    })
+    .sort((a, b) => a.period - b.period);
+}
+
+// Deterministic "teacher marked at" stamp derived from the latest record date.
+export function lastMarkedAt(subjectCode: string): string | null {
+  const rows = attendance.filter((r) => r.subjectCode === subjectCode);
+  if (!rows.length) return null;
+  const last = rows[rows.length - 1];
+  const slot = todaySchedule().find((s) => s.subjectCode === subjectCode);
+  const time = slot ? slot.endTime : "16:10";
+  const d = new Date(`${last.date}T${time}:00`);
+  return d.toLocaleString(undefined, {
+    weekday: "short",
+    day: "2-digit",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 export function todayAttendanceRate(): number {
+
   const today = attendance.length
     ? attendance[attendance.length - 1].date
     : new Date().toISOString().slice(0, 10);
