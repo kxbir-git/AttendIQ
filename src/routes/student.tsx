@@ -222,7 +222,13 @@ function StudentDashboard() {
                     style={{ width: `${s.percentage}%` }}
                   />
                 </div>
+                <div className="mt-1 text-[11px] text-muted-foreground">
+                  {s.lastMarked
+                    ? `Last marked by teacher at ${s.lastMarked}`
+                    : "Not marked yet"}
+                </div>
               </div>
+
             ))}
           </div>
         </div>
