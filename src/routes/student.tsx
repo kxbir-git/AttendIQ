@@ -103,9 +103,67 @@ function StudentDashboard() {
         />
       </div>
 
+      <div className="mt-6 rounded-xl border border-border bg-card p-5">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h3 className="font-display text-lg font-semibold">Today's scheduled classes</h3>
+            <p className="text-xs text-muted-foreground">
+              Period-wise timetable set by admin · attendance marked by faculty
+            </p>
+          </div>
+          <span className="inline-flex items-center gap-1.5 rounded-md bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">
+            <Lock className="h-3.5 w-3.5" /> Read-only
+          </span>
+        </div>
+
+        <div className="mt-3 flex items-start gap-2 rounded-lg border border-border bg-muted/40 p-3 text-xs text-muted-foreground">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+          <p>
+            You cannot mark your own attendance. Classes are scheduled by the admin and
+            attendance is recorded by the subject teacher during the period.
+          </p>
+        </div>
+
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border text-left text-xs uppercase tracking-wider text-muted-foreground">
+                <th className="py-2 pr-4 font-medium">Period</th>
+                <th className="py-2 pr-4 font-medium">Time</th>
+                <th className="py-2 pr-4 font-medium">Subject</th>
+                <th className="py-2 pr-4 font-medium">Faculty</th>
+                <th className="py-2 font-medium">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {schedule.map((slot) => (
+                <tr key={slot.subjectCode} className="border-b border-border/60 last:border-0">
+                  <td className="py-2.5 pr-4 font-medium">P{slot.period}</td>
+                  <td className="py-2.5 pr-4 text-muted-foreground">
+                    <span className="inline-flex items-center gap-1">
+                      <Clock className="h-3.5 w-3.5" />
+                      {slot.startTime}–{slot.endTime}
+                    </span>
+                  </td>
+                  <td className="py-2.5 pr-4">
+                    <div className="font-medium">{slot.subjectName}</div>
+                    <div className="text-xs text-muted-foreground">{slot.subjectCode}</div>
+                  </td>
+                  <td className="py-2.5 pr-4 text-muted-foreground">{slot.faculty}</td>
+                  <td className="py-2.5 text-xs text-muted-foreground">
+                    Marked by teacher
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <div className="mt-6 grid gap-6 lg:grid-cols-3">
         <div className="rounded-xl border border-border bg-card p-5 lg:col-span-2">
           <div className="flex items-center justify-between">
+
             <div>
               <h3 className="font-display text-lg font-semibold">Subject-wise attendance</h3>
               <p className="text-xs text-muted-foreground">Aggregated over last 30 days</p>
