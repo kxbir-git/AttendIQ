@@ -41,7 +41,10 @@ function StudentDashboard() {
     name: s.code,
     subject: s.name,
     percentage: percentageFor(student.id, s.code),
+    lastMarked: lastMarkedAt(s.code),
   }));
+  const schedule = useMemo(() => todaySchedule(), []);
+
 
   const daily = useMemo(() => {
     const map = new Map<string, { total: number; present: number }>();
