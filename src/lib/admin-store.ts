@@ -146,7 +146,7 @@ export function createItem<T extends Item>(
   label: string,
 ) {
   hydrate();
-  state = { ...state, [collection]: [...(state[collection] as T[]), item] } as StoreState;
+  state = { ...state, [collection]: [...(state[collection] as unknown as T[]), item] } as StoreState;
   emit();
   logAudit({ actor, role: "admin", action: "create", entity: collection, detail: `Created ${label}` });
 }
@@ -160,7 +160,7 @@ export function updateItem<T extends Item>(
   hydrate();
   state = {
     ...state,
-    [collection]: (state[collection] as T[]).map((r) => (r.id === item.id ? item : r)),
+    [collection]: (state[collection] as unknown as T[]).map((r) => (r.id === item.id ? item : r)),
   } as StoreState;
   emit();
   logAudit({ actor, role: "admin", action: "update", entity: collection, detail: `Updated ${label}` });
@@ -170,7 +170,7 @@ export function deleteItem(collection: Collection, id: string, actor: string, la
   hydrate();
   state = {
     ...state,
-    [collection]: (state[collection] as Item[]).filter((r) => r.id !== id),
+    [collection]: (state[collection] as unknown as Item[]).filter((r) => r.id !== id),
   } as StoreState;
   emit();
   logAudit({ actor, role: "admin", action: "delete", entity: collection, detail: `Deleted ${label}` });
