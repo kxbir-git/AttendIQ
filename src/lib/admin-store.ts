@@ -144,11 +144,12 @@ export function createItem<T extends Item>(
   item: T,
   actor: string,
   label: string,
+  role: string = "admin",
 ) {
   hydrate();
   state = { ...state, [collection]: [...(state[collection] as unknown as T[]), item] } as StoreState;
   emit();
-  logAudit({ actor, role: "admin", action: "create", entity: collection, detail: `Created ${label}` });
+  logAudit({ actor, role, action: "create", entity: collection, detail: `Created ${label}` });
 }
 
 export function updateItem<T extends Item>(
@@ -156,6 +157,7 @@ export function updateItem<T extends Item>(
   item: T,
   actor: string,
   label: string,
+  role: string = "admin",
 ) {
   hydrate();
   state = {
@@ -163,17 +165,23 @@ export function updateItem<T extends Item>(
     [collection]: (state[collection] as unknown as T[]).map((r) => (r.id === item.id ? item : r)),
   } as StoreState;
   emit();
-  logAudit({ actor, role: "admin", action: "update", entity: collection, detail: `Updated ${label}` });
+  logAudit({ actor, role, action: "update", entity: collection, detail: `Updated ${label}` });
 }
 
-export function deleteItem(collection: Collection, id: string, actor: string, label: string) {
+export function deleteItem(
+  collection: Collection,
+  id: string,
+  actor: string,
+  label: string,
+  role: string = "admin",
+) {
   hydrate();
   state = {
     ...state,
     [collection]: (state[collection] as unknown as Item[]).filter((r) => r.id !== id),
   } as StoreState;
   emit();
-  logAudit({ actor, role: "admin", action: "delete", entity: collection, detail: `Deleted ${label}` });
+  logAudit({ actor, role, action: "delete", entity: collection, detail: `Deleted ${label}` });
 }
 
 export function nextId(prefix: string) {

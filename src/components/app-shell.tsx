@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { LogOut, GraduationCap } from "lucide-react";
-import type { ReactNode } from "react";
-import { clearSession, getSession } from "@/lib/attendance-data";
+import { useEffect, useState, type ReactNode } from "react";
+import { clearSession, getSession, type Session } from "@/lib/attendance-data";
 
 export function AppShell({
   title,
@@ -13,7 +13,8 @@ export function AppShell({
   children: ReactNode;
 }) {
   const navigate = useNavigate();
-  const session = typeof window !== "undefined" ? getSession() : null;
+  const [session, setSessionState] = useState<Session | null>(null);
+  useEffect(() => setSessionState(getSession()), []);
 
   return (
     <div className="min-h-screen bg-background">
