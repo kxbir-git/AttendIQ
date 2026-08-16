@@ -1,7 +1,20 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { LogOut, GraduationCap } from "lucide-react";
-import type { ReactNode } from "react";
-import { clearSession, getSession } from "@/lib/attendance-data";
+import { useEffect, useState, type ReactNode } from "react";
+import { clearSession, getSession, type Session } from "@/lib/attendance-data";
+
+export function AppShell({
+  title,
+  subtitle,
+  children,
+}: {
+  title: string;
+  subtitle?: string;
+  children: ReactNode;
+}) {
+  const navigate = useNavigate();
+  const [session, setSessionState] = useState<Session | null>(null);
+  useEffect(() => setSessionState(getSession()), []);
 
 export function AppShell({
   title,

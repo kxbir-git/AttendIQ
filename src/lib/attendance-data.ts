@@ -50,6 +50,8 @@ export interface Student {
   email: string;
   branch: string;
   semester: number;
+  course?: string;
+  department?: string;
 }
 
 export interface Subject {
@@ -60,6 +62,11 @@ export interface Subject {
   semester: number;
   branch: string;
   credits: number;
+  /** Scheduled class day, e.g. "Mon" */
+  day?: string;
+  period?: number;
+  startTime?: string;
+  endTime?: string;
 }
 
 export interface AttendanceRecord {
