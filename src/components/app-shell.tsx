@@ -16,18 +16,6 @@ export function AppShell({
   const [session, setSessionState] = useState<Session | null>(null);
   useEffect(() => setSessionState(getSession()), []);
 
-export function AppShell({
-  title,
-  subtitle,
-  children,
-}: {
-  title: string;
-  subtitle?: string;
-  children: ReactNode;
-}) {
-  const navigate = useNavigate();
-  const session = typeof window !== "undefined" ? getSession() : null;
-
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-card/70 backdrop-blur">
