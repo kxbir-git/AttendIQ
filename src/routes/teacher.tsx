@@ -11,6 +11,7 @@ import {
   teachers,
   type AttendanceRecord,
 } from "@/lib/attendance-data";
+import { logAudit } from "@/lib/admin-store";
 import { AppShell, StatCard } from "@/components/app-shell";
 
 export const Route = createFileRoute("/teacher")({
@@ -84,6 +85,16 @@ function TeacherDashboard() {
       else attendance.push(rec);
     });
     setSaved(true);
+
+    const presentCount = Object.values(marks).filter(Boolean).length;
+    const absentCount = total - presentCount;
+    logAudit({
+      actor: teacher.name,
+      role: "teacher",
+      action: "attendance",
+      entity: `${selected} · Period ${period}`,
+      detail: `Marked attendance for ${total} students (${presentCount} present, ${absentCount} absent)`,
+    });
   }
 
   function exportSubject() {
