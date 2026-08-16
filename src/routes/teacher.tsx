@@ -11,6 +11,7 @@ import {
   teachers,
   type AttendanceRecord,
 } from "@/lib/attendance-data";
+import { logAudit } from "@/lib/admin-store";
 import { AppShell, StatCard } from "@/components/app-shell";
 
 export const Route = createFileRoute("/teacher")({
