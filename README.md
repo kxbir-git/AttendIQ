@@ -1,141 +1,42 @@
 # Attendance Companion
 
-Prompt:
+A modern Student Attendance Management System with period-wise attendance,
+role-based dashboards (Admin, Teacher, Student), analytics and CSV reports.
 
-Create a modern full-stack Student Attendance Management System using the MERN Stack (MongoDB, Express.js, React.js, Node.js) with a responsive HTML/CSS frontend design.
+## Tech stack
 
-Project Overview
+- React 19 + TanStack Start (SSR) + TanStack Router
+- Vite 7, TypeScript
+- Tailwind CSS v4 + shadcn/ui
+- Recharts for analytics
 
-Build a university/school attendance platform that records attendance period-wise for every subject and automatically calculates attendance percentages.
+## Features
 
-Tech Stack
+- **Admin** — manage departments, teachers, students and subjects with filters,
+  inline CRUD, reports and an audit log.
+- **Teacher** — create subjects with codes and scheduled class times, manage
+  students (course/department), and mark period-wise attendance.
+- **Student** — read-only dashboard with today's schedule, subject-wise
+  percentages, 14-day trend and "last marked by teacher" indicators.
 
-Frontend
+## Getting started
 
- HTML5
-
- CSS3
-
- JavaScript
-
- React.js
-
- React Router
-
- Axios
-
- Bootstrap or Tailwind CSS
-
- Chart.js for analytics
-
-Backend
-
- Node.js
-
- Express.js
-
- JWT Authentication
-
- REST APIs
-
-Database
-
- MongoDB Atlas
-
- Mongoose ODM
-
-User Roles
-
-1. Admin
-
- Manage Departments
-
- Manage Teachers
-
- Manage Students
-
- Manage Subjects
-
- Manage Timetables
-
- Generate Reports
-
-2. Teacher
-
- Login securely
-
- View assigned subjects
-
- Mark attendance period-wise
-
- Edit attendance
-
- View attendance reports
-
- Download attendance sheets
-
-3. Student
-
- Login securely
-
- View attendance percentage
-
- View subject-wise attendance
-
- View daily attendance
-
- Download attendance report
-
-Main Features
-
-Dashboard
-
-Modern dashboard displaying:
-
- Total Students
-
- Total Subjects
-
- Today's Attendance
-
- Attendance Percentage
-
- Active Classes
-
- Attendance Charts
-
-Subject Management
-
-Fields:
-
- Subject Name
-
- Subject Code
-
- Faculty Name
-
- Semester
-
- Branch
-
- Credits
-
-Example:
-
- Data Structures
-
- Operating System
-
- DBMS
-
- Computer Networks
-
- AI
-
-This project was built by ABDUL KABIR KHAN
-
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+```bash
+npm install
 npm run dev
 ```
+
+## Build
+
+```bash
+npm run build
+npm run preview
+```
+
+## Deployment
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for deploying to Vercel.
+
+---
+
+Built by ABDUL KABIR KHAN
