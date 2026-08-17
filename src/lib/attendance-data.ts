@@ -1,5 +1,5 @@
 // Mock data + tiny session store for the attendance prototype.
-// Wire this to Lovable Cloud (Postgres + auth) when moving beyond the UI prototype.
+// Wire this to a real database + auth layer when moving beyond the UI prototype.
 
 export type Role = "admin" | "teacher" | "student";
 
