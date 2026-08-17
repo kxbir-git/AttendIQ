@@ -4,6 +4,21 @@ import { GraduationCap, Shield, BookOpen, User } from "lucide-react";
 import { setSession, type Role, teachers, students } from "@/lib/attendance-data";
 
 export const Route = createFileRoute("/login")({
+  head: () => {
+    const title = "Sign in — AttendIQ";
+    const description =
+      "Sign in to AttendIQ as an admin, teacher or student to manage and view period-wise attendance.";
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+    };
+  },
   component: LoginPage,
 });
 

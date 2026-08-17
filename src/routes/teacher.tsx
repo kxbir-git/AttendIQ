@@ -15,6 +15,21 @@ import { createItem, deleteItem, logAudit, nextId, updateItem, useStore } from "
 import { AppShell, StatCard } from "@/components/app-shell";
 
 export const Route = createFileRoute("/teacher")({
+  head: () => {
+    const title = "Teacher Dashboard — AttendIQ";
+    const description =
+      "Mark period-wise attendance, create subjects with class schedules, and manage your student roster.";
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+    };
+  },
   component: TeacherDashboard,
 });
 

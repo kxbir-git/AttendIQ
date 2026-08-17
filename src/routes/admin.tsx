@@ -35,6 +35,21 @@ import {
 import { AppShell, StatCard } from "@/components/app-shell";
 
 export const Route = createFileRoute("/admin")({
+  head: () => {
+    const title = "Admin Console — AttendIQ";
+    const description =
+      "Manage departments, teachers, students, subjects and timetables, review the audit log, and export attendance reports.";
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+    };
+  },
   component: AdminDashboard,
 });
 

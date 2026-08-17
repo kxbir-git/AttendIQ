@@ -3,7 +3,21 @@ import { useEffect } from "react";
 import { GraduationCap, BarChart3, Users, ClipboardCheck, ArrowRight } from "lucide-react";
 import { getSession } from "@/lib/attendance-data";
 
+const title = "AttendIQ — Period-wise University Attendance";
+const description =
+  "Track subject-wise, period-wise attendance for admins, teachers and students with live analytics and CSV reports.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Landing,
 });
 
