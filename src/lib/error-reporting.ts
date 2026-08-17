@@ -1,24 +1,25 @@
-type LovableErrorOptions = {
+type ErrorOptions = {
   mechanism?: "manual" | "onerror" | "unhandledrejection" | "react_error_boundary";
   handled?: boolean;
   severity?: "error" | "warning" | "info";
 };
 
-type LovableEvents = {
+type ErrorSink = {
   captureException?: (
     error: unknown,
     context?: Record<string, unknown>,
-    options?: LovableErrorOptions,
+    options?: ErrorOptions,
   ) => void;
 };
 
 declare global {
   interface Window {
-    __lovableEvents?: LovableEvents;
+    __lovableEvents?: ErrorSink;
   }
 }
 
-export function reportLovableError(error: unknown, context: Record<string, unknown> = {}) {
+/** Reports a client-side error to the host error sink when one is available. */
+export function reportAppError(error: unknown, context: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;
   window.__lovableEvents?.captureException?.(
     error,
