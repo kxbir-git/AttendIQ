@@ -24,6 +24,21 @@ import { AppShell, StatCard } from "@/components/app-shell";
 
 
 export const Route = createFileRoute("/student")({
+  head: () => {
+    const title = "Student Attendance — AttendIQ";
+    const description =
+      "See today's scheduled periods, subject-wise attendance percentages and your 14-day attendance trend.";
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+    };
+  },
   component: StudentDashboard,
 });
 
